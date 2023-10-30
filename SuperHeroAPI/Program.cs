@@ -1,3 +1,6 @@
+global using Microsoft.EntityFrameworkCore;
+using SuperHeroAPI.Data;
+
 namespace SuperHeroAPI
 {
     public class Program
@@ -9,6 +12,11 @@ namespace SuperHeroAPI
             // Add services to the container.
 
             builder.Services.AddControllers();
+            var connectionString = builder.Configuration.GetConnectionString("Default");
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
