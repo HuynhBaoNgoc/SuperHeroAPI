@@ -36,6 +36,9 @@ namespace SuperHeroAPI
 
 
             app.MapControllers();
+            app.UseRouting();
+            app.MapGet("/", () => "Hello World!");
+            app.MapPut("/{id}", () => "Hello World!");
 
             app.Run();
         }
